@@ -19,6 +19,9 @@ final class HomeVM: BaseVM, HomeVMProtocol {
         super.init()
     }
     
+    /// Called when the view has loaded
+    ///
+    /// This method is empty but kept for protocol conformance and potential future initialization needs.
     func viewDidLoad() {
     }
     
@@ -26,6 +29,12 @@ final class HomeVM: BaseVM, HomeVMProtocol {
         self.getUsers()
     }
     
+    /// Fetches users from the repository
+    ///
+    /// This method:
+    /// 1. Calls the repository to get user data
+    /// 2. Handles success and error cases
+    /// 3. Updates both the users and filteredUsers properties on success
     func getUsers() {
         repo.getUsers()
             .receive(on: DispatchQueue.main)
@@ -44,6 +53,17 @@ final class HomeVM: BaseVM, HomeVMProtocol {
             .store(in: &cancellables)
     }
     
+    /// Filters the users based on a search query
+    ///
+    /// This method filters users by checking if the query string appears in the user's:
+    /// - Name
+    /// - Username
+    /// - Email
+    /// - City
+    ///
+    /// If the query is empty, all users are shown.
+    ///
+    /// - Parameter query: The search string used to filter users
     func filterUsers(with query: String) {
         if query.isEmpty {
             filteredUsers = users

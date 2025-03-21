@@ -9,6 +9,13 @@ import RxSwift
 import Combine
 import UIKit
 
+/// Base view controller that serves as a foundation for all view controllers in the application
+///
+/// This class was added in anticipation of project scaling, following personal development practices.
+/// It provides common functionality and properties that would be shared across multiple view controllers
+/// as the application grows, promoting code reuse and consistent behavior.
+///
+/// - Note: This is primarily a placeholder for future expansion and is part of a personal development approach.
 class BaseVC<T>: UIViewController where T: BaseVM {
     var viewModel: T?
     let disposeBag = DisposeBag()

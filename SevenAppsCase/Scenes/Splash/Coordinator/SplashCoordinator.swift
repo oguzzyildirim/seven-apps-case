@@ -26,7 +26,8 @@ final class SplashCoordinator: ReactiveCoordinator<Void> {
             return Observable.never()
         }
         vc.viewModel = vm
-        let coordinator = HomeCoordinator(rootViewController: rootViewController, navigationController: navigationController)
+        let coordinator = HomeCoordinator(rootViewController: rootViewController,
+                                          navigationController: navigationController)
         return coordinate(to: coordinator)
     }
 }

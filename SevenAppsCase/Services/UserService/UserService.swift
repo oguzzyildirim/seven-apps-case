@@ -22,6 +22,8 @@ final class UserService: UserServiceProtocol {
         self.httpClient = httpClient
     }
     
+    /// Fetches the list of users from the API
+    /// - Returns: A publisher that emits an array of User objects or an error
     func getUsers() -> AnyPublisher<[User]?, Error> {
         return httpClient
             .publisher(UserProvider.users.makeRequest)

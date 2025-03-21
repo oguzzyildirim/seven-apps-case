@@ -7,6 +7,10 @@
 
 import Foundation
 
+/// Protocol that defines the requirements for API endpoints in the application
+///
+/// This protocol provides a standardized way to configure and create network requests
+/// for different API endpoints by specifying URL components, HTTP method, headers, and body parameters.
 protocol ApiEndpoint {
     var baseURLString: String { get }
     var apiVersion: String? { get }
@@ -20,6 +24,7 @@ protocol ApiEndpoint {
 }
 
 extension ApiEndpoint {
+    /// Creates and returns a fully configured URLRequest based on the endpoint properties
     var makeRequest: URLRequest {
         guard let urlComponents = createURLComponents() else {
             fatalError("Could not create URL components from: \(baseURLString)")
@@ -37,6 +42,8 @@ extension ApiEndpoint {
     
     // MARK: - Private helpers
     
+    /// Creates URLComponents from the endpoint configuration
+    /// - Returns: Configured URLComponents or nil if creation fails
     private func createURLComponents() -> URLComponents? {
         guard var components = URLComponents(string: baseURLString) else {
             return nil
@@ -48,6 +55,8 @@ extension ApiEndpoint {
         return components
     }
     
+    /// Configures the HTTP method, headers and body of the request
+    /// - Parameter request: The URLRequest to configure
     private func configureRequest(_ request: inout URLRequest) {
         request.httpMethod = method.rawValue
         request.allHTTPHeaderFields = headers
@@ -55,6 +64,8 @@ extension ApiEndpoint {
         setRequestBody(for: &request)
     }
     
+    /// Sets the HTTP body for the request based on the available parameters
+    /// - Parameter request: The URLRequest to configure with a body
     private func setRequestBody(for request: inout URLRequest) {
         if let customDataBody = customDataBody {
             request.httpBody = customDataBody
@@ -72,6 +83,8 @@ extension ApiEndpoint {
         }
     }
     
+    /// Constructs the full URL path by combining API version, separator path, and endpoint path
+    /// - Returns: The complete path string starting with "/"
     private func getFullPath() -> String {
         var components: [String] = []
         

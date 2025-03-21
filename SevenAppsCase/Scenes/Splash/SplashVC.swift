@@ -8,17 +8,11 @@
 import UIKit
 import RxSwift
 
-class SplashVC: BaseVC<SplashVM> {
+final class SplashVC: BaseVC<SplashVM> {
+    @IBOutlet private var splashIcon: UIImageView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        // Status bar dahil tüm ekranı kaplama
-//        edgesForExtendedLayout = .all
-//        
-//        // Status bar stilini ayarlama
-//        if #available(iOS 13.0, *) {
-//            let window = UIApplication.shared.windows.first
-//            window?.overrideUserInterfaceStyle = .light
-//        }
+        splashIcon.layer.cornerRadius = 16
     }
 }

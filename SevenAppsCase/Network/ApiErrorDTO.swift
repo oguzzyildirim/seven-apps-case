@@ -7,6 +7,10 @@
 
 import Foundation
 
+/// Data transfer object that represents API error responses
+///
+/// This struct maps the common error structure returned by the API,
+/// containing an error code, message, and optional detailed error items.
 struct ApiErrorDTO: Codable {
     let code: String?
     let message: String?
@@ -21,6 +25,11 @@ enum APIErrorHandler: Error {
     case decodingError(Error)
     case emptyErrorWithStatusCode(String)
 
+    /// A human-readable description of the error
+    ///
+    /// This computed property formats the error information in a consistent way
+    /// that can be presented to users or logged for debugging purposes.
+    /// - Returns: String description of the error
     var errorDescription: String? {
         switch self {
         case .customApiError(let apiErrorDTO):

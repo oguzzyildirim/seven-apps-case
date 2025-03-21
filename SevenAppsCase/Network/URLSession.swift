@@ -8,7 +8,14 @@
 import Foundation
 import Combine
 
+/// Protocol defining the requirements for an HTTP client
+///
+/// This protocol abstracts the network layer for making HTTP requests,
+/// allowing for easier testing and potential implementation swapping.
 protocol HTTPClient {
+    /// Creates and returns a publisher for a given network request
+    /// - Parameter request: The URLRequest to be executed
+    /// - Returns: A publisher that emits the data and response upon completion or an error if the request fails
     func publisher(_ request: URLRequest) -> AnyPublisher<(Data, HTTPURLResponse), Error>
 }
 
