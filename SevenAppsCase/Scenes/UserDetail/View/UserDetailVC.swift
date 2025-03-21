@@ -75,6 +75,7 @@ extension UserDetailVC: UITableViewDelegate, UITableViewDataSource {
         case 1:
             let cell = tableView.cellWithIdentifier(cell: UserInfoCell.self, for: indexPath)
             cell.user = viewModel?.user
+            cell.rootViewController = self
             cell.configureCell()
             return cell
         default:
